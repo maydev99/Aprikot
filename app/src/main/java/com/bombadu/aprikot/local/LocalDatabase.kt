@@ -1,13 +1,17 @@
 package com.bombadu.aprikot.local
 
 import android.content.Context
-import androidx.room.*import com.bombadu.aprikot.network.CategoryData
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 
 @Dao
 interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCategories(vararg categoryEntity: CategoryEntity)
+
+    @Query("SELECT * FROM category_data_table")
+    fun getAllCategories(): LiveData<List<CategoryEntity>>
 }
 
 

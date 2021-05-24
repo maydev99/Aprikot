@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.bombadu.aprikot.ui.categories.CategoriesViewModel" />
@@ -17,8 +19,29 @@
         <TextView
             android:id="@+id/category_text_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/category" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/select_a_category"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/category_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+
+            android:background="@color/white"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_text_view"
+            app:setCatRecyclerView="@{viewModel.categories}"
+            app:spanCount="2"
+            tools:itemCount="12"
+            tools:listitem="@layout/category_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

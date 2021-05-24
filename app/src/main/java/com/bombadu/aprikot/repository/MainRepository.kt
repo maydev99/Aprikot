@@ -1,42 +1,33 @@
 package com.bombadu.aprikot.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.local.LocalDatabase
 import com.bombadu.aprikot.network.Network
+import com.bombadu.aprikot.network.NetworkUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MainRepository(private val database: LocalDatabase) {
 
+
+
+    val categoryData: LiveData<List<CategoryEntity>> = database.categoryDao.getAllCategories()
+
+
+
+    //Refresh Call from ViewModel Temporarily Turned Off
     suspend fun refreshCategoryData() {
         try {
             val networkData = Network.api.getCategories()
-            val response = networkData.categories
-            var newInsert: CategoryEntity
-            //val list = mutableListOf<CategoryEntity>()
+            val catData = NetworkUtil.convertCategoryData(networkData)
 
-            for (i in response.indices) {
-                val item = response[i]
-
-                newInsert = CategoryEntity(
-                    item.idCategory,
-                    item.strCategory,
-                    item.strCategoryDescription,
-                    item.strCategoryThumb
-
-                )
-
-                Log.i(TAG, "INSERT: $newInsert")
-                    // list.add(newInsert)
-
-               //database.categoryDao.insertCategories(newInsert)
+            for (i in catData.indices) {
+                withContext(Dispatchers.IO) {
+                    database.categoryDao.insertCategories(catData[i])
+                }
             }
-
-            /*for (i in 0 until list.size) {
-                database.categoryDao.insertCategories(list[i])
-            }*/
-
 
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {

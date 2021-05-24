@@ -11,7 +11,10 @@ import kotlinx.coroutines.launch
 
 class CategoriesViewModel(application: Application): AndroidViewModel(application) {
 
+    private val database = getDatabase(application)
     private val repository = MainRepository(getDatabase(application))
+
+    val categories = repository.categoryData
 
     private val _categoryData = MutableLiveData<List<CategoryData>>()
 
@@ -21,7 +24,7 @@ class CategoriesViewModel(application: Application): AndroidViewModel(applicatio
 
     init {
         viewModelScope.launch {
-            repository.refreshCategoryData()
+            //repository.refreshCategoryData()
         }
     }
 

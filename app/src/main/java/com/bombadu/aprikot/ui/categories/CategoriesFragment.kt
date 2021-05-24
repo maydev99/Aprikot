@@ -26,26 +26,14 @@ class CategoriesFragment : Fragment() {
     ): View {
 
 
-       //
-        // val categoriesViewModel = ViewModelProvider(requireActivity(), CategoriesViewModel::class.java)
-
-
         val binding = FragmentCategoriesBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = categoriesViewModel
+        binding.categoryRecyclerView.adapter = CategoryAdapter(CategoryAdapter.OnClickListener {
+            categoriesViewModel.categories
+        })
 
 
-
-
-        binding.categoryTextView.setOnClickListener {
-           /* categoriesViewModel.getCategoryData()
-
-            categoriesViewModel.categoryData.observe(viewLifecycleOwner ) {
-                binding.categoryTextView.text = it.toString()
-            }*/
-            Log.i("TAG", "CLick")
-
-        }
 
 
         return binding.root
