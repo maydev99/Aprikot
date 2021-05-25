@@ -29,7 +29,7 @@ class CategoryAdapter(private val onClickListener: OnClickListener) :
         parent: ViewGroup,
         viewType: Int
     ): CategoryEntityViewHolder {
-        //return CategoryEntityViewHolder(CategoryItemBinding.inflate(LayoutInflater.from(parent.context)))
+
         return CategoryEntityViewHolder.from(parent)
     }
 
@@ -63,7 +63,7 @@ class CategoryAdapter(private val onClickListener: OnClickListener) :
     }
 
 
-    class OnClickListener(val clickListener: (marsProperty: CategoryEntity) -> Unit) {
-        fun onClick(marsProperty: CategoryEntity) = clickListener(marsProperty)
+    class OnClickListener(val clickListener: (category: CategoryEntity) -> Unit) {
+        fun onClick(category: CategoryEntity) = clickListener(category)
     }
 }
