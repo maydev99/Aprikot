@@ -19,7 +19,7 @@
             android:layout_width="190dp"
             android:layout_height="190dp"
             android:contentDescription="@string/category_image"
-            android:src="@mipmap/ic_launcher"
+            app:srcCompat="@mipmap/ic_launcher"
             app:categoryImage="@{category.categoryImageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

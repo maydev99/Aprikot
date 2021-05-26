@@ -15,13 +15,24 @@ interface CategoryDao {
 }
 
 
+@Dao
+interface RecipeDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRecipes(vararg recipeEntity: RecipeEntity)
+
+    @Query("SELECT * FROM recipe_list_data_table WHERE category = :category")
+    fun getRecipesByCategory(category: String): LiveData<List<RecipeEntity>>
+}
+
+
 @Database(
-    entities = [CategoryEntity::class],
-    version = 2,
+    entities = [CategoryEntity::class, RecipeEntity::class],
+    version = 3,
     exportSchema = false
 )
 abstract class LocalDatabase : RoomDatabase() {
     abstract val categoryDao: CategoryDao
+    abstract val recipeDao: RecipeDao
 }
 
 private lateinit var INSTANCE: LocalDatabase

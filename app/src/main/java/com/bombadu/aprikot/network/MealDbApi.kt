@@ -7,18 +7,24 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface MealDbApi {
 
     @GET("/api/json/v1/1/categories.php")
     suspend fun getCategories() : CategoryData
+
+    @GET("/api/json/v1/1/filter.php?")
+    suspend fun getRecipesByCategory(
+        @Query("c") category: String
+    ) : RecipesData
 }
 
 object Network {
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
-         // level = HttpLoggingInterceptor.Level.BODY
+         //level = HttpLoggingInterceptor.Level.BODY
         })
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
