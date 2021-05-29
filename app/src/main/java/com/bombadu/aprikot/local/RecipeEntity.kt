@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 
 @Entity(
@@ -18,7 +19,7 @@ data class RecipeEntity(
     @ColumnInfo(name = "category") var category: String,
     @ColumnInfo(name = "favorite") var isFavorite: Boolean
 
-) {
+)  {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }

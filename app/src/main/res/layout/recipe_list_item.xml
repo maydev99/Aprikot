@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="recipe"
-            type="com.bombadu.aprikot.local.RecipeEntity" />
+            name="recipes"
+            type="com.bombadu.aprikot.Recipes" />
 
     </data>
 
@@ -33,7 +33,7 @@
                 android:layout_height="270dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@android:drawable/progress_horizontal"
-                app:recipeListImage="@{recipe.recipeImageUrl}"/>
+                app:recipeListImage="@{recipes.recipeImageUrl}"/>
 
             <TextView
                 android:id="@+id/recipe_item_text_view"
@@ -47,7 +47,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 tools:text="Lasagna"
-                android:text="@{recipe.recipeName}"/>
+                android:text="@{recipes.recipeName}"/>
 
 
         </androidx.cardview.widget.CardView>

@@ -18,9 +18,9 @@ class CategoriesViewModel(application: Application): AndroidViewModel(applicatio
 
     val categories = repository.categoryData
 
-    private val _categoryData = MutableLiveData<List<CategoryData>>()
+    /*private val _categoryData = MutableLiveData<List<CategoryData>>()
     val categoryData:  LiveData<List<CategoryData>>
-    get() = _categoryData
+    get() = _categoryData*/
 
    /* private val _navigateToRecipeListFragment = MutableLiveData<String?>()
     val navigateToRecipeListFragment: MutableLiveData<String?>
@@ -40,7 +40,7 @@ class CategoriesViewModel(application: Application): AndroidViewModel(applicatio
 
     init {
         viewModelScope.launch {
-            repository.refreshCategoryData()
+            //repository.refreshCategoryData()
         }
     }
 

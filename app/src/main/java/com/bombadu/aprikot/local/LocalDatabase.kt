@@ -20,6 +20,9 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRecipes(vararg recipeEntity: RecipeEntity)
 
+    @Query("SELECT * FROM recipe_list_data_table")
+    fun getAllRecipes(): LiveData<List<RecipeEntity>>
+
     @Query("SELECT * FROM recipe_list_data_table WHERE category = :category")
     fun getRecipesByCategory(category: String): LiveData<List<RecipeEntity>>
 }

@@ -2,51 +2,19 @@ package com.bombadu.aprikot.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.local.LocalDatabase
 import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.network.Network
 import com.bombadu.aprikot.network.NetworkUtil
+import com.bombadu.aprikot.network.RecipesData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MainRepository(private val database: LocalDatabase) {
 
-
-
     val categoryData: LiveData<List<CategoryEntity>> = database.categoryDao.getAllCategories()
-    lateinit var recipeData: LiveData<List<RecipeEntity>>
-
-
-
-
-
-    fun getRecipesByCategory(category: String) {
-        recipeData = database.recipeDao.getRecipesByCategory(category)
-    }
-
-
-
-
-    suspend fun refreshRecipesData(category: String) {
-        try {
-            val networkData = Network.api.getRecipesByCategory(category)
-            val recipeData  = NetworkUtil.convertRecipeData(networkData, category, false)
-
-            for (i in recipeData.indices) {
-                withContext(Dispatchers.IO) {
-                    database.recipeDao.insertRecipes(recipeData[i])
-                }
-            }
-
-        } catch (e: java.lang.Exception) {
-            withContext(Dispatchers.IO) {
-                Log.e(TAG, "Data request failed")
-            }
-        }
-    }
-
-
 
     suspend fun refreshCategoryData() {
         try {

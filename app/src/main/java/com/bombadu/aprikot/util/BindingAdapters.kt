@@ -4,6 +4,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bombadu.aprikot.R
+import com.bombadu.aprikot.Recipes
 import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.ui.categories.CategoryAdapter
@@ -32,7 +33,7 @@ fun bindRecipeImageToItemImageView(imageView: ImageView, url: String) {
 }
 
 @BindingAdapter("setRecipeRecyclerView")
-fun bindRecipeRecylerView(recyclerView: RecyclerView, recipeEntity: List<RecipeEntity>?) {
+fun bindRecipeRecyclerView(recyclerView: RecyclerView, recipes: List<Recipes>?) {
     val adapter = recyclerView.adapter as RecipeListAdapter
-    adapter.submitList(recipeEntity)
+    adapter.submitList(recipes)
 }
