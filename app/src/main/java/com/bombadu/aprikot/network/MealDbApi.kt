@@ -19,6 +19,11 @@ interface MealDbApi {
     suspend fun getRecipesByCategory(
         @Query("c") category: String
     ) : RecipesData
+
+    @GET("/api/json/v1/1/lookup.php?")
+    suspend fun getPreparationData(
+        @Query("i") preparation: String
+    ) : PreparationData
 }
 
 object Network {

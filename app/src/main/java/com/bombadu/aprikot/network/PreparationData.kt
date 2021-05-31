@@ -1,8 +1,6 @@
 package com.bombadu.aprikot.network
 
 
-import com.google.gson.annotations.SerializedName
-
 data class PreparationData(
     var meals: List<Meal>
 ) {

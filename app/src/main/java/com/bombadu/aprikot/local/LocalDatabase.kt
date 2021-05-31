@@ -7,7 +7,7 @@ import androidx.room.*
 
 @Dao
 interface CategoryDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertCategories(vararg categoryEntity: CategoryEntity)
 
     @Query("SELECT * FROM category_data_table")
@@ -17,7 +17,7 @@ interface CategoryDao {
 
 @Dao
 interface RecipeDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertRecipes(vararg recipeEntity: RecipeEntity)
 
     @Query("SELECT * FROM recipe_list_data_table")
@@ -28,14 +28,25 @@ interface RecipeDao {
 }
 
 
+@Dao
+interface PreparationDao {
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertPreparation(vararg preparationEntity: PreparationEntity)
+
+    @Query("SELECT * FROM preparation_data_table WHERE recipeId = :recipeId")
+    fun getPreparationById(recipeId: String): LiveData<PreparationEntity>
+}
+
+
 @Database(
-    entities = [CategoryEntity::class, RecipeEntity::class],
+    entities = [CategoryEntity::class, RecipeEntity::class, PreparationEntity::class],
     version = 3,
     exportSchema = false
 )
 abstract class LocalDatabase : RoomDatabase() {
     abstract val categoryDao: CategoryDao
     abstract val recipeDao: RecipeDao
+    abstract val preparationDao: PreparationDao
 }
 
 private lateinit var INSTANCE: LocalDatabase

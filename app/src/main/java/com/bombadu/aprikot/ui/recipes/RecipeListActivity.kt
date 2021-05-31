@@ -1,16 +1,17 @@
 package com.bombadu.aprikot.ui.recipes
 
+import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityRecipeListBinding
 import com.bombadu.aprikot.local.CategoryEntity
+import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.ui.categories.CategoriesFragment
+import com.bombadu.aprikot.ui.preparation.PreparationActivity
 
 class RecipeListActivity : AppCompatActivity() {
 
@@ -43,38 +44,22 @@ class RecipeListActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-        //val viewModelFactory = RecipeListViewModel(application, )
-
-       /* if (category != null) {
-            recipeListViewModel.getRecipeDataByCategory(category)
-        }*/
-
-        /*if (category != null) {
-            recipeListViewModel.refreshRecipelistData(category)
-        }*/
-
-
-
-
-
-
-
         binding.recipeListRecyclerView.adapter = RecipeListAdapter(RecipeListAdapter.OnClickListener {
-            /*val category = it.categoryName
-            val intent = Intent(context, RecipeListActivity::class.java)
-            intent.putExtra("category_key", category)
-            startActivity(intent)*/
+
+            val intent = Intent(this, PreparationActivity::class.java)
+            val recipeItem = RecipeEntity(it.recipeId, it.recipeName, it.recipeImageUrl,
+                it.recipeCategory, it.recipeFavorite)
+            intent.putExtra(SELECTED_RECIPE, recipeItem)
+            startActivity(intent)
+
         })
 
+
+    }
+
+    companion object {
+        private val TAG = RecipeListActivity::class.java.simpleName
+        const val SELECTED_RECIPE = "selected_recipe"
 
     }
 }

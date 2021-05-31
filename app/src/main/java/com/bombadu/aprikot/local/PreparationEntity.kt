@@ -6,23 +6,23 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
 @Parcelize
-@Entity
-    (
-    tableName = "recipe_list_data_table",
+@Entity(
+    tableName = "preparation_data_table",
     indices = [Index(value = ["recipeId", "recipeName"], unique = true)]
 )
-data class RecipeEntity(
-
+data class PreparationEntity(
     @ColumnInfo(name = "recipeId") var recipeId: String,
     @ColumnInfo(name = "recipeName") var recipeName: String,
     @ColumnInfo(name = "recipeImageUrl") var recipeImageUrl: String,
-    @ColumnInfo(name = "category") var category: String,
-    @ColumnInfo(name = "favorite") var isFavorite: Boolean
+    @ColumnInfo(name = "isFavorite") var isFavorite: Boolean,
+    @ColumnInfo(name = "recipeIngredients") var recipeIngredients: String,
+    @ColumnInfo(name = "youtubeUrl") var youtubeUrl: String,
+    @ColumnInfo(name = "recipeInstructions") var recipeInstructions: String
 
-) : Parcelable  {
+) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
+

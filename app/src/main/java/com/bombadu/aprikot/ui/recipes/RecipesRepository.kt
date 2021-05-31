@@ -1,15 +1,13 @@
 package com.bombadu.aprikot.ui.recipes
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import com.bombadu.aprikot.Recipes
 import com.bombadu.aprikot.local.LocalDatabase
-import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.network.Network
 import com.bombadu.aprikot.network.NetworkUtil
+import com.bombadu.aprikot.ui.preparation.PreparationRepository
 import com.bombadu.aprikot.util.toDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -18,13 +16,21 @@ class RecipesRepository(private val database: LocalDatabase) {
 
 
     fun getRecipeData(category: String): MutableLiveData<List<Recipes>> {
-        Log.i("TAG", "XXXX$category")
+        return Transformations.map(database.recipeDao.getRecipesByCategory(category))
+        { it.toDomainModel() } as MutableLiveData<List<Recipes>>
 
-        val recipeData = Transformations.map(database.recipeDao.getRecipesByCategory(category))
-        { it.toDomainModel()} as MutableLiveData<List<Recipes>>
-        Log.i("TAG", "XXXX${recipeData.value}")
-        return recipeData
+    }
 
+    suspend fun refreshPreparationData(recipeId : String) {
+        try {
+            val networkData = Network.api.getPreparationData(recipeId)
+            val prepData = NetworkUtil.convertPreparationData(networkData)
+            withContext(Dispatchers.IO) {
+                database.preparationDao.insertPreparation(prepData)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Data Request failed")
+        }
     }
 
 

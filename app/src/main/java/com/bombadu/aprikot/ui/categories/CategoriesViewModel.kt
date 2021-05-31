@@ -13,34 +13,16 @@ import java.util.*
 
 class CategoriesViewModel(application: Application): AndroidViewModel(application) {
 
-    //private val database = getDatabase(application)
     private val repository = MainRepository(getDatabase(application))
 
     val categories = repository.categoryData
-
-    /*private val _categoryData = MutableLiveData<List<CategoryData>>()
-    val categoryData:  LiveData<List<CategoryData>>
-    get() = _categoryData*/
-
-   /* private val _navigateToRecipeListFragment = MutableLiveData<String?>()
-    val navigateToRecipeListFragment: MutableLiveData<String?>
-    get() = _navigateToRecipeListFragment
-
-
-    fun displayRecipesByCategory(category: String) {
-        _navigateToRecipeListFragment.value = category
-    }
-
-    fun displayNavigationComplete() {
-        _navigateToRecipeListFragment.value = null
-    }*/
-
 
 
 
     init {
         viewModelScope.launch {
-            //repository.refreshCategoryData()
+
+            repository.refreshCategoryData()
         }
     }
 

@@ -11,11 +11,6 @@
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.bombadu.aprikot.ui.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
-    <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.bombadu.aprikot.ui.FavoritesFragment"
         android:label="fragment_favorites"

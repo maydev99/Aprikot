@@ -1,10 +1,7 @@
 package com.bombadu.aprikot.ui.recipes
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bombadu.aprikot.Recipes
 import com.bombadu.aprikot.local.CategoryEntity
@@ -25,13 +22,13 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
     fun getRecipeDataByCategory(categoryEntity: CategoryEntity) {
         val category = categoryEntity.categoryName
         repository.getRecipeData(category)
-        refreshRecipelistData(category)
+        refreshRecipeListData(category)
 
 
     }
 
 
-    fun refreshRecipelistData(category: String) {
+    private fun refreshRecipeListData(category: String) {
         viewModelScope.launch {
             repository.refreshRecipesData(category)
         }
