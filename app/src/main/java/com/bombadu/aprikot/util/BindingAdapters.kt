@@ -37,11 +37,11 @@ fun bindRecipeRecyclerView(recyclerView: RecyclerView, recipes: List<Recipes>?) 
     adapter.submitList(recipes)
 }
 
-/*
+
 @BindingAdapter("setPreparationImage")
 fun bindPrepImageToItemImageView(imageView: ImageView, url: String?) {
     Picasso.get().load(url)
         .placeholder(R.drawable.placeholder_off_white)
         .error(R.drawable.placeholder_off_white)
         .into(imageView)
-}*/
+}

@@ -7,7 +7,6 @@ import com.bombadu.aprikot.Recipes
 import com.bombadu.aprikot.local.LocalDatabase
 import com.bombadu.aprikot.network.Network
 import com.bombadu.aprikot.network.NetworkUtil
-import com.bombadu.aprikot.ui.preparation.PreparationRepository
 import com.bombadu.aprikot.util.toDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,27 +20,37 @@ class RecipesRepository(private val database: LocalDatabase) {
 
     }
 
-    suspend fun refreshPreparationData(recipeId : String) {
-        try {
-            val networkData = Network.api.getPreparationData(recipeId)
-            val prepData = NetworkUtil.convertPreparationData(networkData)
-            withContext(Dispatchers.IO) {
-                database.preparationDao.insertPreparation(prepData)
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Data Request failed")
-        }
-    }
-
 
     suspend fun refreshRecipesData(category: String) {
         try {
+            val mealIdList = mutableListOf<String>()
             val networkData = Network.api.getRecipesByCategory(category)
             val recipeData = NetworkUtil.convertRecipeData(networkData, category, false)
 
             for (i in recipeData.indices) {
                 withContext(Dispatchers.IO) {
                     database.recipeDao.insertRecipes(recipeData[i])
+                    //Make list of recipe ids
+                    mealIdList.add(recipeData[i].recipeId)
+                }
+            }
+
+            /*
+                Pre-Caching Preparation Data
+                Using recipe id list, call network and get preparation data
+                for each id, then save to local db.
+             */
+
+            for (i in 0 until mealIdList.size) {
+                withContext(Dispatchers.IO) {
+                    val id = mealIdList[i]
+                    val netData = Network.api.getPreparationData(id)
+                    val prepData = NetworkUtil.convertPreparationData(netData)
+
+                    withContext(Dispatchers.IO) {
+                        database.preparationDao.insertPreparation(prepData)
+
+                    }
                 }
             }
 

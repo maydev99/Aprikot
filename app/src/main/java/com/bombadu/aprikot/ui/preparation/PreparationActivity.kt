@@ -45,7 +45,7 @@ class PreparationActivity : AppCompatActivity() {
         //preparationViewModel.getPreparationDataById(recipeItem)
      //preparationViewModel.refreshPreparationData(recipeItem.recipeId)
 
-        preparationViewModel.refreshPreparationData(recipeItem.recipeId)
+        //preparationViewModel.refreshPreparationData(recipeItem.recipeId)
 
         /*preparationViewModel.preparations.observe(this, Observer {
             Picasso.get().load(it.recipeImageUrl)

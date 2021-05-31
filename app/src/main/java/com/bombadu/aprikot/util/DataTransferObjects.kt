@@ -17,6 +17,7 @@ fun List<RecipeEntity>.toDomainModel(): List<Recipes> {
     }
 }
 
+
 fun PreparationEntity.toDomainModel(): Preparation {
     return Preparation(
         recipeId = this.recipeId,
@@ -24,7 +25,7 @@ fun PreparationEntity.toDomainModel(): Preparation {
         recipeImageUrl = this.recipeImageUrl,
         isFavorite = this.isFavorite,
         recipeIngredients = this.recipeIngredients,
-        youtubeUrl= this.youtubeUrl,
+        youtubeUrl = this.youtubeUrl,
         recipeInstructions = this.recipeInstructions
     )
 }

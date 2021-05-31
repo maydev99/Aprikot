@@ -102,8 +102,12 @@ object NetworkUtil {
         measurementList.add(item[0].strMeasure20)
 
         //Eliminate Null Values
+
+        ingredientList.removeAll<String?>(listOf(null))
+       // measurementList.removeAll(listOf("null"))
         ingredientList.removeAll(listOf(""))
         measurementList.removeAll(listOf(""))
+
 
 
         /*
@@ -122,7 +126,7 @@ object NetworkUtil {
             //Check if measurement exists for the ingredient
             val combined = if (i <= measListSize) {
                 val measurements = measurementList[i]
-                "$measurements $ingredients" //concatenates if both exist
+                "$measurements: $ingredients" //concatenates if both exist
             } else {
                 ingredients //if no measurement data
             }
@@ -157,4 +161,6 @@ object NetworkUtil {
         )
 
     }
+
+
 }

@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -22,6 +23,7 @@ data class PreparationEntity(
     @ColumnInfo(name = "recipeInstructions") var recipeInstructions: String
 
 ) : Parcelable {
+    @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
