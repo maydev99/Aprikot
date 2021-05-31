@@ -24,4 +24,6 @@
     <string name="select_a_category">Select a Category</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
+    <string name="mark_as_favorite">Mark as Favorite</string>
+
 </resources>

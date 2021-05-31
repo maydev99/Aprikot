@@ -1,6 +1,7 @@
 package com.bombadu.aprikot.ui.recipes
 
 import android.app.Application
+import android.text.BoringLayout
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.bombadu.aprikot.Recipes
@@ -19,6 +20,8 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
 
 
 
+
+
     fun getRecipeDataByCategory(categoryEntity: CategoryEntity) {
         val category = categoryEntity.categoryName
         repository.getRecipeData(category)
@@ -33,6 +36,8 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
             repository.refreshRecipesData(category)
         }
     }
+
+
 
     companion object {
         private val TAG = RecipeListViewModel::class.java.simpleName

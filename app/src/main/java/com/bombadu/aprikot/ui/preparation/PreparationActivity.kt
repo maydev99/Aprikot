@@ -3,12 +3,16 @@ package com.bombadu.aprikot.ui.preparation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityPreparationBinding
+import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
 import com.squareup.picasso.Picasso
@@ -16,6 +20,11 @@ import com.squareup.picasso.Picasso
 class PreparationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPreparationBinding
+    private var isFavorite = false
+    private var mMenu: Menu? = null
+    private var id: Int = 0
+    private lateinit var preparationEntity: PreparationEntity
+
 
     private val preparationViewModel: PreparationViewModel by lazy {
         ViewModelProvider(this).get(PreparationViewModel::class.java)
@@ -32,8 +41,7 @@ class PreparationActivity : AppCompatActivity() {
 
         val recipeItem = intent.extras!!.getParcelable<RecipeEntity>(RecipeListActivity.SELECTED_RECIPE)
 
-        //Log.i("TAG", "ID: ${recipeItem!!.recipeId}")
-
+        
         val viewModelFactory = PreparationViewModelFactory(recipeItem!!, application)
 
         binding.viewModel = viewModelFactory.let {
@@ -42,20 +50,53 @@ class PreparationActivity : AppCompatActivity() {
             ).get(PreparationViewModel::class.java)
         }
 
-        //preparationViewModel.getPreparationDataById(recipeItem)
-     //preparationViewModel.refreshPreparationData(recipeItem.recipeId)
-
-        //preparationViewModel.refreshPreparationData(recipeItem.recipeId)
-
         /*preparationViewModel.preparations.observe(this, Observer {
-            Picasso.get().load(it.recipeImageUrl)
-                .placeholder(R.drawable.placeholder_off_white)
-                .error(R.drawable.placeholder_off_white)
-                .into(binding.preparationImageView)
+            preparationEntity = it
+            *//*isFavorite = it.isFavorite
+            id = it.id*//*
 
-            binding.preparationTitleTextView.text = it.recipeName
         })*/
+        
 
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.preparation_menu, menu)
+        mMenu = menu
+        isFavorite = preparationEntity.isFavorite
+        if (isFavorite) {
+            mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
+        } else {
+            mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorite -> {
+                if (isFavorite) {
+                    mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
+                    isFavorite = false
+                    preparationEntity.isFavorite = false
+                    //updateDB(preparationEntity)
+                } else {
+                    mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
+                    isFavorite = true
+                    preparationEntity.isFavorite = true
+                   // updateDB(preparationEntity)
+                }
+
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun updateDB(preparationEntity: PreparationEntity) {
+        preparationViewModel.insertUpdate(preparationEntity)
     }
 
 }

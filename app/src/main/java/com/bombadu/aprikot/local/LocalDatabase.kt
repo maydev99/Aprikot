@@ -30,7 +30,7 @@ interface RecipeDao {
 
 @Dao
 interface PreparationDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPreparation(vararg preparationEntity: PreparationEntity)
 
     @Query("SELECT * FROM preparation_data_table WHERE recipeId = :recipeId")
