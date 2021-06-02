@@ -14,6 +14,17 @@ import kotlinx.coroutines.withContext
 class RecipesRepository(private val database: LocalDatabase) {
 
 
+    suspend fun checkData(category: String) {
+        withContext(Dispatchers.IO) {
+            val exists = database.recipeDao.isRowIsExist(category)
+            if (!exists) {
+                refreshRecipesData(category)
+            }
+        }
+
+    }
+
+
     fun getRecipeData(category: String): MutableLiveData<List<Recipes>> {
         return Transformations.map(database.recipeDao.getRecipesByCategory(category))
         { it.toDomainModel() } as MutableLiveData<List<Recipes>>
@@ -23,6 +34,8 @@ class RecipesRepository(private val database: LocalDatabase) {
 
     suspend fun refreshRecipesData(category: String) {
         try {
+
+
             val mealIdList = mutableListOf<String>()
             val networkData = Network.api.getRecipesByCategory(category)
             val recipeData = NetworkUtil.convertRecipeData(networkData, category, false)
@@ -36,16 +49,16 @@ class RecipesRepository(private val database: LocalDatabase) {
             }
 
             /*
-                Pre-Caching Preparation Data
-                Using recipe id list, call network and get preparation data
-                for each id, then save to local db.
-             */
+                  Pre-Caching Preparation Data
+                  Using recipe id list, call network and get preparation data
+                  for each id, then save to local db.
+            */
 
             for (i in 0 until mealIdList.size) {
                 withContext(Dispatchers.IO) {
                     val id = mealIdList[i]
                     val netData = Network.api.getPreparationData(id)
-                    val prepData = NetworkUtil.convertPreparationData(netData)
+                    val prepData = NetworkUtil.convertPreparationData(netData, category)
 
                     withContext(Dispatchers.IO) {
                         database.preparationDao.insertPreparation(prepData)
@@ -53,6 +66,7 @@ class RecipesRepository(private val database: LocalDatabase) {
                     }
                 }
             }
+
 
         } catch (e: java.lang.Exception) {
             withContext(Dispatchers.IO) {

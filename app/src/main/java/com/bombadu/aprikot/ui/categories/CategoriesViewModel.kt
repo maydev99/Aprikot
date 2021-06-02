@@ -21,8 +21,7 @@ class CategoriesViewModel(application: Application): AndroidViewModel(applicatio
 
     init {
         viewModelScope.launch {
-
-            repository.refreshCategoryData()
+            repository.checkData()
         }
     }
 

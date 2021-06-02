@@ -17,6 +17,16 @@ class MainRepository(private val database: LocalDatabase) {
 
     val categoryData: LiveData<List<CategoryEntity>> = database.categoryDao.getAllCategories()
 
+    suspend fun checkData() {
+        withContext(Dispatchers.IO) {
+            val exists = database.categoryDao.isExists()
+            if (!exists) {
+                refreshCategoryData()
+            }
+        }
+
+    }
+
 
     suspend fun refreshCategoryData() {
         try {

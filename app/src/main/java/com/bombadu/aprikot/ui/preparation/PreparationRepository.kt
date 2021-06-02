@@ -13,12 +13,16 @@ class PreparationRepository(private val database: LocalDatabase) {
         return database.preparationDao.getPreparationById(recipeId)
     }
 
+    fun getFavorites(): LiveData<List<PreparationEntity>> {
+        return database.preparationDao.getFavorites(true)
+    }
+
     suspend fun insertUpdatedData(preparationEntity: PreparationEntity) {
         withContext(Dispatchers.IO) {
             database.preparationDao.insertPreparation(preparationEntity)
         }
-
     }
+
 
 }
 

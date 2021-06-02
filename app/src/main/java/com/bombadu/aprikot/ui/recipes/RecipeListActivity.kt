@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityRecipeListBinding
@@ -16,6 +17,7 @@ import com.bombadu.aprikot.ui.preparation.PreparationActivity
 class RecipeListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecipeListBinding
+    private var recName: String = ""
 
     private val recipeListViewModel: RecipeListViewModel by lazy {
         ViewModelProvider(this).get(RecipeListViewModel::class.java)
@@ -39,7 +41,24 @@ class RecipeListActivity : AppCompatActivity() {
             ).get(RecipeListViewModel::class.java)
         }
 
-        recipeListViewModel.getRecipeDataByCategory(categoryItem)
+        /*recipeListViewModel.getRecipeDataByCategory(categoryItem)
+        try {
+            recipeListViewModel.recipes.observe(this, Observer { myData ->
+              if (myData[0].recipeFavorite = null) {
+                  Log.i("TAG", "DATA: NO DATA")
+              } else {
+                  Log.i("TAG", "DATA: DATA EXISTS")
+              }
+            })
+        } catch (e: Exception) {
+
+        }*/
+       
+        
+        
+        
+
+
 
 
 

@@ -20,7 +20,8 @@ data class PreparationEntity(
     @ColumnInfo(name = "isFavorite") var isFavorite: Boolean,
     @ColumnInfo(name = "recipeIngredients") var recipeIngredients: String,
     @ColumnInfo(name = "youtubeUrl") var youtubeUrl: String,
-    @ColumnInfo(name = "recipeInstructions") var recipeInstructions: String
+    @ColumnInfo(name = "recipeInstructions") var recipeInstructions: String,
+    @ColumnInfo(name = "recipeCategory") var recipeCategory: String
 
 ) : Parcelable {
     @IgnoredOnParcel

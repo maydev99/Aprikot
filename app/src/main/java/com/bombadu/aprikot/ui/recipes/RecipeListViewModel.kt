@@ -16,7 +16,15 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
 
 
     val  recipes = repository.getRecipeData(categoryEntity.categoryName)
+
     val categoryTitle = categoryEntity.categoryName
+
+    init {
+        viewModelScope.launch {
+            repository.checkData(categoryEntity.categoryName)
+        }
+
+    }
 
 
 
@@ -25,7 +33,7 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
     fun getRecipeDataByCategory(categoryEntity: CategoryEntity) {
         val category = categoryEntity.categoryName
         repository.getRecipeData(category)
-        refreshRecipeListData(category)
+       // refreshRecipeListData(category)
 
 
     }

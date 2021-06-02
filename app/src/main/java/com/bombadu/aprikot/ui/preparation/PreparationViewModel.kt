@@ -18,7 +18,6 @@ class PreparationViewModel(application: Application, recipeEntity: RecipeEntity)
             repository.insertUpdatedData(preparationEntity)
         }
 
-
     }
 
 

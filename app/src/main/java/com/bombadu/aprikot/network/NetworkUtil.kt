@@ -42,7 +42,7 @@ object NetworkUtil {
 
 
 
-    fun convertPreparationData(preparationData: PreparationData): PreparationEntity {
+    fun convertPreparationData(preparationData: PreparationData, category: String): PreparationEntity {
         val item = preparationData.meals
         val ingredientList = mutableListOf<String>()
         val measurementList = mutableListOf<String>()
@@ -157,7 +157,9 @@ object NetworkUtil {
             false,
             recipeIngredients,
             item[0].strYoutube,
-            item[0].strInstructions
+            item[0].strInstructions,
+            category
+
         )
 
     }

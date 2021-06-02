@@ -12,6 +12,9 @@ interface CategoryDao {
 
     @Query("SELECT * FROM category_data_table")
     fun getAllCategories(): LiveData<List<CategoryEntity>>
+
+    @Query("SELECT EXISTS(SELECT * FROM category_data_table)")
+    fun isExists(): Boolean
 }
 
 
@@ -20,11 +23,12 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertRecipes(vararg recipeEntity: RecipeEntity)
 
-    @Query("SELECT * FROM recipe_list_data_table")
-    fun getAllRecipes(): LiveData<List<RecipeEntity>>
 
     @Query("SELECT * FROM recipe_list_data_table WHERE category = :category")
     fun getRecipesByCategory(category: String): LiveData<List<RecipeEntity>>
+
+    @Query("SELECT EXISTS(SELECT * FROM recipe_list_data_table WHERE category = :category)")
+    fun isRowIsExist(category: String) : Boolean
 }
 
 
@@ -35,7 +39,16 @@ interface PreparationDao {
 
     @Query("SELECT * FROM preparation_data_table WHERE recipeId = :recipeId")
     fun getPreparationById(recipeId: String): LiveData<PreparationEntity>
+
+    @Query("SELECT EXISTS(SELECT * FROM preparation_data_table WHERE recipeId = :id)")
+    fun isRowIsExist(id: String) : Boolean
+
+    @Query("SELECT * FROM preparation_data_table WHERE isFavorite = :isFavorite")
+    fun getFavorites(isFavorite: Boolean = true): LiveData<List<PreparationEntity>>
+
 }
+
+
 
 
 @Database(

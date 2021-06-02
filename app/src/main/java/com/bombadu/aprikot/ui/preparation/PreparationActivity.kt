@@ -23,7 +23,7 @@ class PreparationActivity : AppCompatActivity() {
     private var isFavorite = false
     private var mMenu: Menu? = null
     private var id: Int = 0
-    private lateinit var preparationEntity: PreparationEntity
+    private lateinit var prepEntity: PreparationEntity
 
 
     private val preparationViewModel: PreparationViewModel by lazy {
@@ -50,22 +50,19 @@ class PreparationActivity : AppCompatActivity() {
             ).get(PreparationViewModel::class.java)
         }
 
-        /*preparationViewModel.preparations.observe(this, Observer {
-            preparationEntity = it
-            *//*isFavorite = it.isFavorite
-            id = it.id*//*
-
-        })*/
-        
-
-
+        preparationViewModel.preparations.observe(this, Observer {
+            prepEntity = it
+            isFavorite = it.isFavorite
+            val recipeName  = it.recipeName
+            Log.i("TAG", "RECIPENAME: $recipeName")
+        })
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.preparation_menu, menu)
         mMenu = menu
-        isFavorite = preparationEntity.isFavorite
+
         if (isFavorite) {
             mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
         } else {
@@ -80,13 +77,13 @@ class PreparationActivity : AppCompatActivity() {
                 if (isFavorite) {
                     mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
                     isFavorite = false
-                    preparationEntity.isFavorite = false
-                    //updateDB(preparationEntity)
+                    prepEntity.isFavorite = false
+                    updateDB(prepEntity)
                 } else {
                     mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
                     isFavorite = true
-                    preparationEntity.isFavorite = true
-                   // updateDB(preparationEntity)
+                    prepEntity.isFavorite = true
+                    updateDB(prepEntity)
                 }
 
 

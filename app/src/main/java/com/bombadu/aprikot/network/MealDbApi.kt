@@ -29,7 +29,7 @@ interface MealDbApi {
 object Network {
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
-         //level = HttpLoggingInterceptor.Level.BODY
+         level = HttpLoggingInterceptor.Level.BODY
         })
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
