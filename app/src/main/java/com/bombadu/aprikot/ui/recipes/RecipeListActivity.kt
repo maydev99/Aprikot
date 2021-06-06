@@ -41,27 +41,6 @@ class RecipeListActivity : AppCompatActivity() {
             ).get(RecipeListViewModel::class.java)
         }
 
-        /*recipeListViewModel.getRecipeDataByCategory(categoryItem)
-        try {
-            recipeListViewModel.recipes.observe(this, Observer { myData ->
-              if (myData[0].recipeFavorite = null) {
-                  Log.i("TAG", "DATA: NO DATA")
-              } else {
-                  Log.i("TAG", "DATA: DATA EXISTS")
-              }
-            })
-        } catch (e: Exception) {
-
-        }*/
-       
-        
-        
-        
-
-
-
-
-
 
         binding.recipeListRecyclerView.adapter = RecipeListAdapter(RecipeListAdapter.OnClickListener {
 

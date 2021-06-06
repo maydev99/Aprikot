@@ -28,7 +28,7 @@ class MainRepository(private val database: LocalDatabase) {
     }
 
 
-    suspend fun refreshCategoryData() {
+    private suspend fun refreshCategoryData() {
         try {
             val networkData = Network.api.getCategories()
             val catData = NetworkUtil.convertCategoryData(networkData)

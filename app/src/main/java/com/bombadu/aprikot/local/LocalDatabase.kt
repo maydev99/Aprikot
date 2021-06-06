@@ -43,8 +43,8 @@ interface PreparationDao {
     @Query("SELECT EXISTS(SELECT * FROM preparation_data_table WHERE recipeId = :id)")
     fun isRowIsExist(id: String) : Boolean
 
-    @Query("SELECT * FROM preparation_data_table WHERE isFavorite = :isFavorite")
-    fun getFavorites(isFavorite: Boolean = true): LiveData<List<PreparationEntity>>
+    @Query("SELECT * FROM preparation_data_table WHERE isFavorite=1")
+    fun getFavorites(): LiveData<List<PreparationEntity>>
 
 }
 

@@ -1,11 +1,9 @@
 package com.bombadu.aprikot.ui.preparation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -15,7 +13,6 @@ import com.bombadu.aprikot.databinding.ActivityPreparationBinding
 import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
-import com.squareup.picasso.Picasso
 
 class PreparationActivity : AppCompatActivity() {
 
@@ -50,11 +47,9 @@ class PreparationActivity : AppCompatActivity() {
             ).get(PreparationViewModel::class.java)
         }
 
-        preparationViewModel.preparations.observe(this, Observer {
+        preparationViewModel.preparations.observe(this, {
             prepEntity = it
             isFavorite = it.isFavorite
-            val recipeName  = it.recipeName
-            Log.i("TAG", "RECIPENAME: $recipeName")
         })
 
     }
