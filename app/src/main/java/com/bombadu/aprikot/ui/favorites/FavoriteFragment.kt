@@ -2,8 +2,10 @@ package com.bombadu.aprikot.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +22,7 @@ class FavoriteFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var favoriteAdapter: FavoriteAdapter
+    private lateinit var dialog: TextView
 
 
     override fun onCreateView(
@@ -28,6 +31,9 @@ class FavoriteFragment : Fragment() {
     ): View {
 
         val binding = FragmentFavoriteBinding.inflate(inflater)
+
+
+        dialog = binding.noFavoritesDialog
         return binding.root
     }
 
@@ -42,6 +48,11 @@ class FavoriteFragment : Fragment() {
     private fun loadFavorites() {
         favoritesViewModel.favorite.observe(viewLifecycleOwner, Observer { favData ->
             favData.let {
+                if (it.isNullOrEmpty()) {
+                    dialog.visibility = View.VISIBLE
+                } else {
+                    dialog.visibility = View.GONE
+                }
                 favoriteAdapter.submitList(it)
                 favoriteAdapter.notifyDataSetChanged()
             }

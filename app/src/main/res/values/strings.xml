@@ -25,5 +25,7 @@
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
     <string name="mark_as_favorite">Mark as Favorite</string>
+    <string name="no_favorites">You have no favorites saved</string>
+    <string name="display">Display</string>
 
 </resources>

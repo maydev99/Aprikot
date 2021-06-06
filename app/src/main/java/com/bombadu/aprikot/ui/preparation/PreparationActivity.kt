@@ -1,13 +1,16 @@
 package com.bombadu.aprikot.ui.preparation
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityPreparationBinding
 import com.bombadu.aprikot.local.PreparationEntity
@@ -31,6 +34,12 @@ class PreparationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preparation)
+
+        val sharedPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val sleepOn = sharedPrefs.getBoolean("is_sleep_on", true)
+        if (!sleepOn) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
 
         binding.lifecycleOwner = this
 

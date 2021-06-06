@@ -9,13 +9,8 @@
 
     <TextView
         android:id="@+id/favorite_title_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
+        style="@style/screen_title_style"
         android:text="@string/favorite"
-        android:textColor="@color/black"
-        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +25,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favorite_title_text_view"
         tools:listitem="@layout/favorite_list_item" />
+
+    <TextView
+        android:id="@+id/no_favorites_dialog"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="@drawable/dialog_background"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/no_favorites"
+        android:textSize="26sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

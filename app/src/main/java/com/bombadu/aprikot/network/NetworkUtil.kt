@@ -126,7 +126,7 @@ object NetworkUtil {
             //Check if measurement exists for the ingredient
             val combined = if (i <= measListSize) {
                 val measurements = measurementList[i]
-                "$measurements: $ingredients" //concatenates if both exist
+                "$measurements  $ingredients" //concatenates if both exist
             } else {
                 ingredients //if no measurement data
             }

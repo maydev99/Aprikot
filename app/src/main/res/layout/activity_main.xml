@@ -11,7 +11,7 @@
         android:id="@+id/bottom_nav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/placeholder_off_white"
+        android:background="@drawable/bottom_nav_background"
         android:elevation="10dp"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

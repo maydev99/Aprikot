@@ -15,10 +15,11 @@
         tools:context=".ui.preparation.PreparationActivity"
         android:paddingBottom="16dp">
 
+
         <ImageView
             android:id="@+id/preparation_imageView"
             android:layout_width="0dp"
-            android:layout_height="240dp"
+            android:layout_height="270dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,10 +35,10 @@
             android:gravity="center_horizontal"
             android:text="@{viewModel.preparations.recipeName}"
             android:textColor="@color/white"
-            android:background="@color/design_default_color_primary_dark"
+            android:background="@drawable/recipe_title_gradient"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/preparation_imageView"
+            app:layout_constraintBottom_toBottomOf="@+id/preparation_imageView"
             tools:text="Title" />
 
         <ScrollView
@@ -63,7 +64,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:textStyle="bold"
-                    android:textColor="@color/design_default_color_primary_dark"/>
+                    android:textColor="@color/aprikot_dark"/>
 
 
                 <TextView
@@ -89,7 +90,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:textColor="@color/design_default_color_primary_dark"/>
+                    android:textColor="@color/aprikot_dark"/>
 
 
 
