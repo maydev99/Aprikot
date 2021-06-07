@@ -10,10 +10,10 @@
 
         <SwitchPreferenceCompat
             app:key="is_sleep_on"
-            app:summaryOff="Sleep Off (Keep Screen Awake)"
-            app:summaryOn="Sleep On"
-            app:defaultValue="true"
-            app:title="Recipe Screen Sleep" />
+            app:summaryOff="Off (Default)"
+            app:summaryOn="On (Prevents phone sleep on Recipe Screen)"
+            app:defaultValue="false"
+            app:title="Wake Lock" />
 
     </PreferenceCategory>
 

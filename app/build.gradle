@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.bombadu.aprikot"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -108,6 +108,9 @@ dependencies {
     //Ktx Support for ViewModels
     implementation 'androidx.activity:activity-ktx:1.2.3'
     implementation 'androidx.fragment:fragment-ktx:1.3.4'
+
+    //Work
+    implementation("androidx.work:work-runtime-ktx:2.6.0-beta01")
 
 
 

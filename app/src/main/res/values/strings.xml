@@ -27,5 +27,11 @@
     <string name="mark_as_favorite">Mark as Favorite</string>
     <string name="no_favorites">You have no favorites saved</string>
     <string name="display">Display</string>
+    <string name="notification_channel_id">Notification Channel</string>
+    <string name="notification_channel_name">Notifications</string>
+    <string name="notification_description">A Message from Aprikot</string>
+    <string name="aprikot_recipe_app">Aprikot Recipe App</string>
+    <string name="wake_lock_is_on">Wake Lock is On</string>
+    <string name="getting_hungry">Getting Hungry? Check out Apricot for new recipes.</string>
 
 </resources>
