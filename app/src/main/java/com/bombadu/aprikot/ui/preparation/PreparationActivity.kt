@@ -1,6 +1,5 @@
 package com.bombadu.aprikot.ui.preparation
 
-import android.app.NotificationManager
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -9,7 +8,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.bombadu.aprikot.R
@@ -17,14 +15,14 @@ import com.bombadu.aprikot.databinding.ActivityPreparationBinding
 import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
-import com.bombadu.aprikot.util.sendNotification
+
 
 class PreparationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPreparationBinding
     private var isFavorite = false
     private var mMenu: Menu? = null
-    private var id: Int = 0
+    //private var id: Int = 0
     private lateinit var prepEntity: PreparationEntity
 
 
@@ -41,8 +39,6 @@ class PreparationActivity : AppCompatActivity() {
         val wakeOn = sharedPrefs.getBoolean("is_sleep_on", false)
         if (wakeOn) {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-
-
 
         }
 

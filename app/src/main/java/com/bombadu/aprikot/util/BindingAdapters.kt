@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bombadu.aprikot.R
 import com.bombadu.aprikot.Recipes
 import com.bombadu.aprikot.local.CategoryEntity
-import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.ui.categories.CategoryAdapter
 import com.bombadu.aprikot.ui.recipes.RecipeListAdapter
 import com.squareup.picasso.Picasso
@@ -46,5 +45,19 @@ fun bindPrepImageToItemImageView(imageView: ImageView, url: String?) {
         .error(R.drawable.placeholder_off_white)
         .into(imageView)
 }
+
+/*@BindingAdapter("setFavoriteRecyclerView")
+fun bindFavoriteRecyclerView(recyclerView: RecyclerView, recipes: List<PreparationEntity>?){
+    val adapter = recyclerView.adapter as FavoriteAdapter2
+    adapter.submitList(recipes)
+}
+
+@BindingAdapter("settFavoriteImage")
+fun bindFavoriteImageToImageView(imageView: ImageView, url: String?) {
+    Picasso.get().load(url)
+        .placeholder(R.drawable.placeholder_off_white)
+        .error(R.drawable.placeholder_off_white)
+        .into(imageView)
+}*/
 
 

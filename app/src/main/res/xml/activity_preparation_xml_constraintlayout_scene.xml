@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="500">
+       <KeyFrameSet>
+       </KeyFrameSet>
+    </Transition>
+
+
+
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:layout_height="49dp"
+            android:layout_width="147dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/scrollView2"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_editor_absoluteX="264dp"
+            motion:layout_editor_absoluteY="221dp" />
+
+        <Constraint
+            android:layout_height="49dp"
+            android:layout_width="147dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/preparation_imageView"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_editor_absoluteX="264dp"
+            motion:layout_editor_absoluteY="221dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+    </ConstraintSet>
+</MotionScene>

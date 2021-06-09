@@ -13,17 +13,17 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="16dp"
         app:layoutDescription="@xml/activity_preparation_xml_constraintlayout_scene"
         tools:context=".ui.preparation.PreparationActivity">
 
+
         <ImageView
             android:id="@+id/preparation_imageView"
-            android:layout_width="0dp"
-            android:layout_height="270dp"
+            android:layout_width="350dp"
+            android:layout_height="0dp"
             android:contentDescription="@{`Image of ` + viewModel.preparations.recipeName}"
             android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:setPreparationImage="@{viewModel.preparations.recipeImageUrl}"
@@ -31,27 +31,30 @@
 
         <TextView
             android:id="@+id/preparation_title_text_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/recipe_title_gradient"
             android:gravity="center_horizontal"
             android:text="@{viewModel.preparations.recipeName}"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/preparation_imageView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/preparation_imageView"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="Title" />
 
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:fillViewport="true"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/preparation_title_text_view">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/preparation_imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"

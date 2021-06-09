@@ -30,7 +30,7 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
 
 
 
-    fun getRecipeDataByCategory(categoryEntity: CategoryEntity) {
+    /*fun getRecipeDataByCategory(categoryEntity: CategoryEntity) {
         val category = categoryEntity.categoryName
         repository.getRecipeData(category)
        // refreshRecipeListData(category)
@@ -44,11 +44,11 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
             repository.refreshRecipesData(category)
         }
     }
+*/
 
-
-
+/*
     companion object {
         private val TAG = RecipeListViewModel::class.java.simpleName
-    }
+    }*/
 
 }

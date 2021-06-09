@@ -103,7 +103,7 @@ dependencies {
 
 
     //Kpermissions
-    implementation 'com.github.fondesa:kpermissions:3.2.1'
+    //implementation 'com.github.fondesa:kpermissions:3.2.1'
 
     //Ktx Support for ViewModels
     implementation 'androidx.activity:activity-ktx:1.2.3'
@@ -111,6 +111,9 @@ dependencies {
 
     //Work
     implementation("androidx.work:work-runtime-ktx:2.6.0-beta01")
+
+    //Ken Burns
+    implementation 'com.flaviofaria:kenburnsview:1.0.7'
 
 
 
