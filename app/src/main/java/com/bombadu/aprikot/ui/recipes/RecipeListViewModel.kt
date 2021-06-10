@@ -1,34 +1,56 @@
 package com.bombadu.aprikot.ui.recipes
 
 import android.app.Application
-import android.text.BoringLayout
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.bombadu.aprikot.Recipes
 import com.bombadu.aprikot.local.CategoryEntity
-import com.bombadu.aprikot.local.RecipeEntity
+import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.getDatabase
 import kotlinx.coroutines.launch
 
-class RecipeListViewModel(application: Application, categoryEntity: CategoryEntity) : AndroidViewModel(application)  {
+class RecipeListViewModel(application: Application, categoryEntity: CategoryEntity) :
+    AndroidViewModel(application) {
 
     private val repository = RecipesRepository(getDatabase(application))
 
 
-    val  recipes = repository.getRecipeData(categoryEntity.categoryName)
+    val recipes = repository.getRecipeData(categoryEntity.categoryName)
 
     val categoryTitle = categoryEntity.categoryName
 
-    init {
+/*
+    private val _navigateToSelectedRecipe = MutableLiveData<PreparationEntity?>()
+    val navigateToSelectedRecipe: MutableLiveData<PreparationEntity?>
+        get() = _navigateToSelectedRecipe*/
+
+
+            init {
+                viewModelScope.launch {
+                    repository.checkData(categoryEntity.categoryName)
+
+                }
+
+            }
+
+
+    fun getRecipePreparation(recipeId: String, category: String) {
         viewModelScope.launch {
-            repository.checkData(categoryEntity.categoryName)
+            repository.refreshIndividualRecipe(recipeId, category)
         }
 
     }
 
 
+    /*fun preparationDetails(preparationEntity: PreparationEntity) {
+        _navigateToSelectedRecipe.value = preparationEntity
+    }
 
-
+    fun preparationDetailComplete() {
+        _navigateToSelectedRecipe.value = null
+    }
+*/
 
     /*fun getRecipeDataByCategory(categoryEntity: CategoryEntity) {
         val category = categoryEntity.categoryName

@@ -2,10 +2,8 @@ package com.bombadu.aprikot.ui.recipes
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityRecipeListBinding
@@ -13,6 +11,7 @@ import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.ui.categories.CategoriesFragment
 import com.bombadu.aprikot.ui.preparation.PreparationActivity
+
 
 class RecipeListActivity : AppCompatActivity() {
 
@@ -43,6 +42,8 @@ class RecipeListActivity : AppCompatActivity() {
 
 
         binding.recipeListRecyclerView.adapter = RecipeListAdapter(RecipeListAdapter.OnClickListener {
+
+        recipeListViewModel.getRecipePreparation(it.recipeId, it.recipeCategory)
 
             val intent = Intent(this, PreparationActivity::class.java)
             val recipeItem = RecipeEntity(it.recipeId, it.recipeName, it.recipeImageUrl,

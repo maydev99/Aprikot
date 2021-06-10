@@ -15,6 +15,7 @@ import com.bombadu.aprikot.databinding.ActivityPreparationBinding
 import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
+import java.lang.Exception
 
 
 class PreparationActivity : AppCompatActivity() {
@@ -58,8 +59,13 @@ class PreparationActivity : AppCompatActivity() {
         }
 
         preparationViewModel.preparations.observe(this, {
-            prepEntity = it
-            isFavorite = it.isFavorite
+            try{
+                prepEntity = it
+                isFavorite = it.isFavorite
+            }catch (e: Exception) {
+                e.printStackTrace()
+            }
+
         })
 
     }

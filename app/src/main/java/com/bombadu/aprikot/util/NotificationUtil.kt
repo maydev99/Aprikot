@@ -52,3 +52,7 @@ fun NotificationManager.sendNotification(
 
 
 }
+
+fun NotificationManager.cancelNotifications() {
+    cancelAll()
+}

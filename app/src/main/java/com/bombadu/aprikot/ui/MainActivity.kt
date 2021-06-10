@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.bombadu.aprikot.R
+import com.bombadu.aprikot.util.cancelNotifications
 import com.bombadu.aprikot.util.sendNotification
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,11 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val wakeOn = sharedPrefs.getBoolean("is_sleep_on", false)
+        val notificationManager = this.getSystemService(
+            NotificationManager::class.java) as NotificationManager
         if (wakeOn) {
-            val notificationManager = this.getSystemService(
-                NotificationManager::class.java)
-
             notificationManager.sendNotification(applicationContext, getString(R.string.wake_lock_is_on))
+        } else {
+            notificationManager.cancelNotifications()
         }
     }
 

@@ -11,6 +11,7 @@ import com.bombadu.aprikot.util.toDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+
 class RecipesRepository(private val database: LocalDatabase) {
 
 
@@ -32,19 +33,32 @@ class RecipesRepository(private val database: LocalDatabase) {
     }
 
 
+    suspend fun refreshIndividualRecipe(recipeId: String, category: String) {
+        withContext(Dispatchers.IO) {
+            val exists = database.preparationDao.isRowIsExist(recipeId)
+            if (!exists) {
+                val netData = Network.api.getPreparationData(recipeId)
+                val prepData = NetworkUtil.convertPreparationData(netData, category)
+                database.preparationDao.insertPreparation(prepData)
+            }
+        }
+
+    }
+
+
     suspend fun refreshRecipesData(category: String) {
         try {
-
 
             val mealIdList = mutableListOf<String>()
             val networkData = Network.api.getRecipesByCategory(category)
             val recipeData = NetworkUtil.convertRecipeData(networkData, category, false)
 
+
             for (i in recipeData.indices) {
                 withContext(Dispatchers.IO) {
                     database.recipeDao.insertRecipes(recipeData[i])
                     //Make list of recipe ids
-                    mealIdList.add(recipeData[i].recipeId)
+                    //mealIdList.add(recipeData[i].recipeId)
                 }
             }
 
@@ -54,18 +68,18 @@ class RecipesRepository(private val database: LocalDatabase) {
                   for each id, then save to local db.
             */
 
-            for (i in 0 until mealIdList.size) {
-                withContext(Dispatchers.IO) {
-                    val id = mealIdList[i]
-                    val netData = Network.api.getPreparationData(id)
-                    val prepData = NetworkUtil.convertPreparationData(netData, category)
+            /* for (i in 0 until mealIdList.size) {
+                 withContext(Dispatchers.IO) {
+                     val id = mealIdList[i]
+                     val netData = Network.api.getPreparationData(id)
+                     val prepData = NetworkUtil.convertPreparationData(netData, category)
 
-                    withContext(Dispatchers.IO) {
-                        database.preparationDao.insertPreparation(prepData)
+                     withContext(Dispatchers.IO) {
+                         database.preparationDao.insertPreparation(prepData)
 
-                    }
-                }
-            }
+                     }
+                 }
+             }*/
 
 
         } catch (e: java.lang.Exception) {
