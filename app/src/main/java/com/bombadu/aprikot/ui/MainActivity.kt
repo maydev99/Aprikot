@@ -1,5 +1,6 @@
 package com.bombadu.aprikot.ui
 
+import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -8,10 +9,12 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.bombadu.aprikot.R
+import com.bombadu.aprikot.network.NetworkUtil
 import com.bombadu.aprikot.util.cancelNotifications
 import com.bombadu.aprikot.util.sendNotification
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,7 +41,14 @@ class MainActivity : AppCompatActivity() {
         } else {
             notificationManager.cancelNotifications()
         }
+        
+        
+        if (NetworkUtil.checkNetConnectivity(this)) {
+            NetworkUtil.showNoInternetDialog(this)
+        }
     }
+
+
 
     private fun setupNavigation() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)

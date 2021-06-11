@@ -14,8 +14,8 @@ import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityPreparationBinding
 import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
+import com.bombadu.aprikot.network.NetworkUtil
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
-import java.lang.Exception
 
 
 class PreparationActivity : AppCompatActivity() {
@@ -23,7 +23,6 @@ class PreparationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreparationBinding
     private var isFavorite = false
     private var mMenu: Menu? = null
-    //private var id: Int = 0
     private lateinit var prepEntity: PreparationEntity
 
 
@@ -47,22 +46,25 @@ class PreparationActivity : AppCompatActivity() {
 
         val application = requireNotNull(this).application
 
-        val recipeItem = intent.extras!!.getParcelable<RecipeEntity>(RecipeListActivity.SELECTED_RECIPE)
+        val recipeItem =
+            intent.extras!!.getParcelable<RecipeEntity>(RecipeListActivity.SELECTED_RECIPE)
 
-        
+
         val viewModelFactory = PreparationViewModelFactory(recipeItem!!, application)
 
         binding.viewModel = viewModelFactory.let {
-            ViewModelProvider(this,
+            ViewModelProvider(
+                this,
                 it
             ).get(PreparationViewModel::class.java)
         }
 
         preparationViewModel.preparations.observe(this, {
-            try{
+            try {
                 prepEntity = it
                 isFavorite = it.isFavorite
-            }catch (e: Exception) {
+
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
 
@@ -75,9 +77,11 @@ class PreparationActivity : AppCompatActivity() {
         mMenu = menu
 
         if (isFavorite) {
-            mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
+            mMenu?.findItem(R.id.favorite)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
         } else {
-            mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
+            mMenu?.findItem(R.id.favorite)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
         }
         return super.onCreateOptionsMenu(menu)
     }
@@ -86,12 +90,14 @@ class PreparationActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.favorite -> {
                 if (isFavorite) {
-                    mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
+                    mMenu?.findItem(R.id.favorite)?.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
                     isFavorite = false
                     prepEntity.isFavorite = false
                     updateDB(prepEntity)
                 } else {
-                    mMenu?.findItem(R.id.favorite)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
+                    mMenu?.findItem(R.id.favorite)?.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
                     isFavorite = true
                     prepEntity.isFavorite = true
                     updateDB(prepEntity)

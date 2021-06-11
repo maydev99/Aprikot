@@ -3,6 +3,7 @@ package com.bombadu.aprikot.util
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bombadu.aprikot.R
 import com.bombadu.aprikot.Recipes
 import com.bombadu.aprikot.local.CategoryEntity
@@ -42,7 +43,7 @@ fun bindRecipeRecyclerView(recyclerView: RecyclerView, recipes: List<Recipes>?) 
 fun bindPrepImageToItemImageView(imageView: ImageView, url: String?) {
     Picasso.get().load(url)
         .placeholder(R.drawable.placeholder_off_white)
-        .error(R.drawable.placeholder_off_white)
+        .error(R.drawable.whoops)
         .into(imageView)
 }
 

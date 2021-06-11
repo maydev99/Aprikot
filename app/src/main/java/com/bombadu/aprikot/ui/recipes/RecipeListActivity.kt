@@ -16,7 +16,6 @@ import com.bombadu.aprikot.ui.preparation.PreparationActivity
 class RecipeListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecipeListBinding
-    private var recName: String = ""
 
     private val recipeListViewModel: RecipeListViewModel by lazy {
         ViewModelProvider(this).get(RecipeListViewModel::class.java)
@@ -57,7 +56,6 @@ class RecipeListActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = RecipeListActivity::class.java.simpleName
         const val SELECTED_RECIPE = "selected_recipe"
 
     }

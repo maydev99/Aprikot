@@ -33,5 +33,7 @@
     <string name="aprikot_recipe_app">Aprikot Recipe App</string>
     <string name="wake_lock_is_on">Wake Lock is On</string>
     <string name="getting_hungry">Getting Hungry? Check out Apricot for new recipes.</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="please_check_internet_connection">Please check your connection to the internet</string>
 
 </resources>

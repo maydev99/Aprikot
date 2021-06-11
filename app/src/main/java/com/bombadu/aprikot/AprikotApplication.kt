@@ -18,6 +18,7 @@ class AprikotApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         delayedInit()
     }
 
