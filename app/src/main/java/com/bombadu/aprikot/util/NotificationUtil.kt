@@ -12,21 +12,21 @@ import com.bombadu.aprikot.ui.MainActivity
 const val NOTIFICATION_ID = 0
 
 fun NotificationManager.sendNotification(
-    applicationContext: Context,
+    context: Context,
     bodyText: String
 
 ) {
 
-    val contentIntent = Intent(applicationContext, MainActivity::class.java)
+    val contentIntent = Intent(context, MainActivity::class.java)
     val contentPendingIntent = PendingIntent.getActivity(
-        applicationContext,
+        context,
         NOTIFICATION_ID,
         contentIntent,
         PendingIntent.FLAG_UPDATE_CURRENT
     )
 
     val downloadImage = BitmapFactory.decodeResource(
-        applicationContext.resources,
+        context.resources,
         R.drawable.apricot250
 
     )
@@ -37,12 +37,12 @@ fun NotificationManager.sendNotification(
 
 
     val builder = NotificationCompat.Builder(
-        applicationContext,
-        applicationContext.getString(R.string.notification_channel_id)
+        context,
+        context.getString(R.string.notification_channel_id)
     ).setOnlyAlertOnce(true)
 
         .setSmallIcon(R.drawable.ic_stat_name)
-        .setContentTitle(applicationContext.getString(R.string.aprikot_recipe_app))
+        .setContentTitle(context.getString(R.string.aprikot_recipe_app))
         .setContentText(bodyText)
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)

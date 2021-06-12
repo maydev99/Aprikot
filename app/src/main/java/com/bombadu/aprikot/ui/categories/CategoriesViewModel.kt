@@ -13,7 +13,6 @@ class CategoriesViewModel(application: Application): AndroidViewModel(applicatio
     val categories = repository.categoryData
 
 
-
     init {
         viewModelScope.launch {
             repository.checkData()

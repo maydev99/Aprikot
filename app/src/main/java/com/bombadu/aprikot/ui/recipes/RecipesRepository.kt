@@ -1,6 +1,5 @@
 package com.bombadu.aprikot.ui.recipes
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -11,7 +10,6 @@ import com.bombadu.aprikot.network.NetworkUtil
 import com.bombadu.aprikot.util.toDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 
 class RecipesRepository(private val database: LocalDatabase) {
