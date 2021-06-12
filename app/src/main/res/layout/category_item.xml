@@ -39,6 +39,7 @@
             tools:text="Fruit" />
 
         <View
+            android:id="@+id/spacer"
             android:layout_width="185dp"
             android:layout_height="16dp"
             android:background="@color/white"

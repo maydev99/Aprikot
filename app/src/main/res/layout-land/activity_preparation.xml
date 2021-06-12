@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.bombadu.aprikot.ui.preparation.PreparationViewModel" />
@@ -62,6 +63,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/ingredients_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -88,6 +90,7 @@
 
 
                 <TextView
+                    android:id="@+id/instructions_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

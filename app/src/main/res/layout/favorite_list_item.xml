@@ -9,6 +9,7 @@
         android:layout_margin="8dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="10dp"
@@ -24,8 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:srcCompat="@android:drawable/progress_horizontal"
-                />
+                app:srcCompat="@android:drawable/progress_horizontal" />
 
             <TextView
                 android:id="@+id/favorite_item_text_view"

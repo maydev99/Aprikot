@@ -1,20 +1,82 @@
-package com.bombadu.aprikot.ui.recipes
+package com.bombadu.aprikot.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.bombadu.aprikot.AprikotApplication
 import com.bombadu.aprikot.Recipes
+import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.local.LocalDatabase
+import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.network.Network
 import com.bombadu.aprikot.network.NetworkUtil
+import com.bombadu.aprikot.ui.categories.CategoriesViewModel
 import com.bombadu.aprikot.util.toDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+class MainRepository (aprikotApplication: AprikotApplication, private val database: LocalDatabase)  {
 
-class RecipesRepository(private val database: LocalDatabase) {
+    val categoryData: LiveData<List<CategoryEntity>> = database.categoryDao.getAllCategories()
+    val favoriteData: LiveData<List<PreparationEntity>> = database.preparationDao.getFavorites()
+    val application = aprikotApplication
 
 
+
+    //Category Screen
+    suspend fun checkData() {
+        withContext(Dispatchers.IO) {
+            val exists = database.categoryDao.isExists()
+            if (!exists) {
+                refreshCategoryData()
+            }
+        }
+
+    }
+
+
+    private suspend fun refreshCategoryData() {
+        try {
+            val networkData = Network.api.getCategories()
+            val catData = NetworkUtil.convertCategoryData(networkData)
+
+            for (i in catData.indices) {
+                withContext(Dispatchers.IO) {
+                    database.categoryDao.insertCategories(catData[i])
+                }
+            }
+
+            val viewModel = CategoriesViewModel(application)
+            viewModel.progress.value = 8
+
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Log.e(TAG, "Data Request failed")
+            }
+        }
+    }
+
+
+    //Favorite Screen
+    fun getFavorites() : LiveData<List<PreparationEntity>> {
+        return database.preparationDao.getFavorites()
+    }
+
+
+    //Preparation Screen
+    fun getPreparationData(recipeId: String): LiveData<PreparationEntity> {
+        return database.preparationDao.getPreparationById(recipeId)
+    }
+
+
+    suspend fun insertUpdatedData(preparationEntity: PreparationEntity) {
+        withContext(Dispatchers.IO) {
+            database.preparationDao.insertPreparation(preparationEntity)
+        }
+    }
+
+    //Recipes List Screen Section
     suspend fun checkData(category: String) {
         withContext(Dispatchers.IO) {
             val exists = database.recipeDao.isRowIsExist(category)
@@ -55,7 +117,6 @@ class RecipesRepository(private val database: LocalDatabase) {
 
     }
 
-
     private suspend fun refreshRecipesData(category: String) {
         try {
 
@@ -77,8 +138,8 @@ class RecipesRepository(private val database: LocalDatabase) {
         }
     }
 
-    companion object {
-        private val TAG = RecipesRepository::class.java.simpleName
-    }
 
+    companion object {
+        private val TAG = MainRepository::class.java.simpleName
+    }
 }

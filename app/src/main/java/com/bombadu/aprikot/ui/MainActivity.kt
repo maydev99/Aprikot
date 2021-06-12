@@ -19,9 +19,8 @@ import com.bombadu.aprikot.util.AlarmReceiver
 import com.bombadu.aprikot.util.cancelNotifications
 import com.bombadu.aprikot.util.sendNotification
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity() {
 
 

@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.databinding.FragmentCategoriesBinding
 import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class CategoriesFragment : Fragment() {
 
 
@@ -29,6 +28,7 @@ class CategoriesFragment : Fragment() {
         val binding = FragmentCategoriesBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = categoriesViewModel
+
         binding.categoryRecyclerView.adapter = CategoryAdapter(CategoryAdapter.OnClickListener {
             val intent = Intent(context, RecipeListActivity::class.java)
             val categoryItem = CategoryEntity(it.categoryId, it.categoryName,
