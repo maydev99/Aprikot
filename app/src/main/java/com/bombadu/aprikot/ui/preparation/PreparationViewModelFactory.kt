@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.local.RecipeEntity
-import java.lang.IllegalArgumentException
 
 class PreparationViewModelFactory(
     private val recipeEntity: RecipeEntity,

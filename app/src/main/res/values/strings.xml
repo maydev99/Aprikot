@@ -25,7 +25,7 @@
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
     <string name="mark_as_favorite">Mark as Favorite</string>
-    <string name="no_favorites">You have no favorites saved</string>
+    <string name="no_favorites">you have no favorites saved</string>
     <string name="display">Display</string>
     <string name="notification_channel_id">Notification Channel</string>
     <string name="notification_channel_name">Notifications</string>

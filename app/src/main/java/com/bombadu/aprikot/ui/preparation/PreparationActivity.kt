@@ -14,7 +14,6 @@ import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityPreparationBinding
 import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
-import com.bombadu.aprikot.network.NetworkUtil
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
 
 
@@ -81,7 +80,7 @@ class PreparationActivity : AppCompatActivity() {
                 ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_red)
         } else {
             mMenu?.findItem(R.id.favorite)?.icon =
-                ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
+                ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_white_24)
         }
         return super.onCreateOptionsMenu(menu)
     }
@@ -91,7 +90,7 @@ class PreparationActivity : AppCompatActivity() {
             R.id.favorite -> {
                 if (isFavorite) {
                     mMenu?.findItem(R.id.favorite)?.icon =
-                        ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_red_24)
+                        ContextCompat.getDrawable(this, R.drawable.ic_outline_favorite_white_24)
                     isFavorite = false
                     prepEntity.isFavorite = false
                     updateDB(prepEntity)

@@ -11,7 +11,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ContentInfoCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val seconds = 1000L
         val minutes = seconds * 60
         val hours = minutes * 60
-        val days = hours * 24
+        //val days = hours * 24
         val trigger = 5 * seconds
         val interval = 2 * hours
 
