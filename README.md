@@ -2,7 +2,7 @@
 Aprikot
 Recipe Application
 
-![Image](https://github.com/maydev99/Aprikot/blob/master/device-2021-06-12-172405.png)
+![Image](https://github.com/maydev99/Aprikot/blob/master/aprikot_tripple_screen_shot.png)
 
 Udacity Kotlin Android Developer NanoDegree
 Michael May
