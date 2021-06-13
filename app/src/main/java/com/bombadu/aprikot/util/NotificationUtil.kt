@@ -13,7 +13,8 @@ const val NOTIFICATION_ID = 0
 
 fun NotificationManager.sendNotification(
     context: Context,
-    bodyText: String
+    bodyText: String,
+    channelId: String
 
 ) {
 
@@ -38,7 +39,7 @@ fun NotificationManager.sendNotification(
 
     val builder = NotificationCompat.Builder(
         context,
-        context.getString(R.string.notification_channel_id)
+        channelId
     ).setOnlyAlertOnce(true)
 
         .setSmallIcon(R.drawable.ic_stat_name)

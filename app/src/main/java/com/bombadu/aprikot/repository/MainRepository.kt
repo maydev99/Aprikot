@@ -1,6 +1,7 @@
 package com.bombadu.aprikot.repository
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -38,6 +39,9 @@ class MainRepository (aprikotApplication: AprikotApplication, private val databa
 
     private suspend fun refreshCategoryData() {
         try {
+           // val viewModel = CategoriesViewModel(application)
+           // viewModel.progress.value = View.VISIBLE
+
             val networkData = Network.api.getCategories()
             val catData = NetworkUtil.convertCategoryData(networkData)
 
@@ -47,12 +51,11 @@ class MainRepository (aprikotApplication: AprikotApplication, private val databa
                 }
             }
 
-            val viewModel = CategoriesViewModel(application)
-            viewModel.progress.value = 8
 
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
                 Log.e(TAG, "Data Request failed")
+
             }
         }
     }

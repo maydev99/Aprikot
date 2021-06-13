@@ -36,5 +36,18 @@
             tools:listitem="@layout/recipe_list_item"
             app:setRecipeRecyclerView="@{viewModel.recipes}"/>
 
+
+        <ProgressBar
+            android:id="@+id/recipe_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.progress}"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

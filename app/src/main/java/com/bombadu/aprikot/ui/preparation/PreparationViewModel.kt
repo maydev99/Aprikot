@@ -1,7 +1,9 @@
 package com.bombadu.aprikot.ui.preparation
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bombadu.aprikot.AprikotApplication
 import com.bombadu.aprikot.local.PreparationEntity
@@ -16,12 +18,14 @@ class PreparationViewModel(application: Application, recipeEntity: RecipeEntity)
 
     val preparations = repository.getPreparationData(recipeEntity.recipeId)
 
+    var progress = MutableLiveData<Int>()
+
     fun insertUpdate(preparationEntity: PreparationEntity) {
         viewModelScope.launch {
+
             repository.insertUpdatedData(preparationEntity)
         }
 
     }
-
 
 }

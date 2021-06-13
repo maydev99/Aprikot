@@ -39,6 +39,7 @@ class CategoryAdapter(private val onClickListener: OnClickListener) :
         holder.itemView.setOnClickListener {
             onClickListener.onClick(category)
         }
+
         holder.bind(category)
     }
 
@@ -53,10 +54,13 @@ class CategoryAdapter(private val onClickListener: OnClickListener) :
                     false
                 )
 
+
+
                 return CategoryEntityViewHolder(binding)
             }
         }
         fun bind(item: CategoryEntity) {
+
             binding.category = item
             binding.executePendingBindings()
         }

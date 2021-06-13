@@ -1,6 +1,7 @@
 package com.bombadu.aprikot.ui.categories
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -20,13 +21,13 @@ class CategoriesViewModel(application: Application): AndroidViewModel(applicatio
 
     init {
         viewModelScope.launch {
-            progress.value = 0 //Visible
+            progress.value = View.VISIBLE
             repository.checkData()
         }
     }
 
     fun loadingComplete() {
-        progress.value = 8 //Invisible
+        progress.value = View.GONE // 8 //Invisible
     }
 
 

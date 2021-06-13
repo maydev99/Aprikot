@@ -2,6 +2,7 @@ package com.bombadu.aprikot.ui.preparation
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
@@ -63,11 +64,14 @@ class PreparationActivity : AppCompatActivity() {
                 prepEntity = it
                 isFavorite = it.isFavorite
 
+
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
 
         })
+
 
     }
 

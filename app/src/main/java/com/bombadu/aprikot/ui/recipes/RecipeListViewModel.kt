@@ -1,7 +1,9 @@
 package com.bombadu.aprikot.ui.recipes
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bombadu.aprikot.AprikotApplication
 import com.bombadu.aprikot.local.CategoryEntity
@@ -14,18 +16,24 @@ class RecipeListViewModel(application: Application, categoryEntity: CategoryEnti
 
     private val repository = MainRepository(application as AprikotApplication, getDatabase(application))
 
-
     val recipes = repository.getRecipeData(categoryEntity.categoryName)
 
     val categoryTitle = categoryEntity.categoryName
+
+    var progress = MutableLiveData<Int>()
 
 
     init {
         viewModelScope.launch {
             repository.checkData(categoryEntity.categoryName)
+            progress.value = View.VISIBLE
 
         }
 
+    }
+
+    fun loadingComplete() {
+        progress.value = View.GONE
     }
 
 
