@@ -1,2 +1,2 @@
 # Aprikot
-https://docs.google.com/viewer?url=$https://github.com/maydev99/Aprikot/blob/master/Aprikot%20Design%20Document%20-%20Google%20Docs.pdf
+https://docs.google.com/viewer?url=$https://docs.google.com/document/d/102Taxj4ghoze4ax1q-8KuyYFN1BCILbTtXNKVPXMqvU/edit?usp=sharing
