@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.local.RecipeEntity
 
+@Suppress("UNCHECKED_CAST")
 class PreparationViewModelFactory(
     private val recipeEntity: RecipeEntity,
     private val application: Application) : ViewModelProvider.Factory {

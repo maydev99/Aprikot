@@ -11,11 +11,15 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.bombadu.aprikot.R
+import com.bombadu.aprikot.network.ConnectionType
+import com.bombadu.aprikot.network.NetworkMonitorUtil
 import com.bombadu.aprikot.util.AlarmReceiver
 import com.bombadu.aprikot.util.cancelNotifications
 import com.bombadu.aprikot.util.sendNotification
@@ -25,13 +29,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     private var isFirstTime = true
+    private val networkMonitor = NetworkMonitorUtil(this)
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setupNavigation()
+
+        checkNetwork()
+
+
         createChannel(
             getString(R.string.notification_channel_id),
             getString(R.string.notification_channel_name)
@@ -46,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         loadFirstTimePrefs()
 
     }
+
+
 
 
     private fun setupNavigation() {
@@ -156,5 +167,44 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    override fun onResume() {
+        super.onResume()
+        networkMonitor.register()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        networkMonitor.unregister()
+    }
+
+    private fun checkNetwork() {
+        networkMonitor.result = { isAvailable, type ->
+            runOnUiThread {
+                when(isAvailable) {
+                    true -> {
+                        when(type) {
+                            ConnectionType.Wifi -> {
+                                Log.i(TAG, "Wifi Connected")
+                            }
+
+                            ConnectionType.Cellular -> {
+                                Log.i(TAG, "Cellular Connected")
+                            }
+
+                            else -> {}
+                        }
+                    }
+                    false -> {
+                        Log.i(TAG, "No Connection")
+                        Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    companion object {
+        val TAG = MainActivity::class.java.simpleName
+    }
 
 }

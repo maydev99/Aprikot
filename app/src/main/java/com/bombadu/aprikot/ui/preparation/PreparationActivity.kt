@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -15,6 +16,9 @@ import com.bombadu.aprikot.R
 import com.bombadu.aprikot.databinding.ActivityPreparationBinding
 import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
+import com.bombadu.aprikot.network.ConnectionType
+import com.bombadu.aprikot.network.NetworkMonitorUtil
+import com.bombadu.aprikot.ui.MainActivity
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
 
 
@@ -24,6 +28,7 @@ class PreparationActivity : AppCompatActivity() {
     private var isFavorite = false
     private var mMenu: Menu? = null
     private lateinit var prepEntity: PreparationEntity
+    private val networkMonitor = NetworkMonitorUtil(this)
 
 
     private val preparationViewModel: PreparationViewModel by lazy {
@@ -34,6 +39,8 @@ class PreparationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preparation)
+
+        checkNetwork()
 
         val sharedPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val wakeOn = sharedPrefs.getBoolean("is_sleep_on", false)
@@ -114,6 +121,42 @@ class PreparationActivity : AppCompatActivity() {
 
     private fun updateDB(preparationEntity: PreparationEntity) {
         preparationViewModel.insertUpdate(preparationEntity)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        networkMonitor.register()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        networkMonitor.unregister()
+    }
+
+    private fun checkNetwork() {
+        networkMonitor.result = { isAvailable, type ->
+            runOnUiThread {
+                when(isAvailable) {
+                    true -> {
+                        when(type) {
+                            ConnectionType.Wifi -> {
+                                Log.i(MainActivity.TAG, "Wifi Connected")
+                            }
+
+                            ConnectionType.Cellular -> {
+                                Log.i(MainActivity.TAG, "Cellular Connected")
+                            }
+
+                            else -> {}
+                        }
+                    }
+                    false -> {
+                        Log.i(MainActivity.TAG, "No Connection")
+                        Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -1,9 +1,5 @@
 package com.bombadu.aprikot.network
 
-import android.app.AlertDialog
-import android.content.Context
-import android.net.ConnectivityManager
-import com.bombadu.aprikot.R
 import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.local.PreparationEntity
 import com.bombadu.aprikot.local.RecipeEntity
@@ -169,20 +165,5 @@ object NetworkUtil {
         )
 
     }
-
-    fun checkNetConnectivity(context: Context): Boolean {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.isDefaultNetworkActive
-
-    }
-
-    fun showNoInternetDialog(context: Context) {
-        val alert = AlertDialog.Builder(context)
-        alert.setTitle(context.getString(R.string.no_internet_connection))
-        alert.setMessage(context.getString(R.string.please_check_internet_connection))
-        alert.setIcon(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
-        alert.show()
-    }
-
 
 }

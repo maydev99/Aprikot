@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bombadu.aprikot.databinding.FragmentCategoriesBinding
 import com.bombadu.aprikot.local.CategoryEntity
 import com.bombadu.aprikot.ui.recipes.RecipeListActivity
-import java.lang.Exception
 
 
 class CategoriesFragment : Fragment() {
@@ -51,8 +49,6 @@ class CategoriesFragment : Fragment() {
             } catch (e: Exception) {
                 Log.e(TAG, "No Data")
             }
-
-
 
         })
 
