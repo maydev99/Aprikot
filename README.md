@@ -13,10 +13,12 @@ This is a free to use API that does not require an api key.
 
 When starting the app you will see a categories screen that represents various meal categories. There are three fragments attached to the MainActivity all connected through Navigation Manager and Bottom Navigation bar. Along with the categories screen you can navigate to either the Favorites or Settings Screen.
 
+
 Categories Screen
 
 Select a category and you are taken to a new activity where a list of recipes is displayed.
 Scroll through the list, find  and tap on your desired recipe. You are then taken to the Preparation Screen.
+
 
 Preparation Screen
 
@@ -26,10 +28,12 @@ There is a Heart Icon in the top right section of the screen. Tap the heart icon
 Pressing the Back Arrow on the upper left take you back to the Categories Screen
 The Back Button will take you back to the Recipe List Screen.
 
+
 Favorites Screen
 
 The Favorites Screen shows any recipe that you have marked as favorites in the Preparation Screen. If there are no favorites a dialog will show indicating that.
 Tap on a recipe and you will be taken to the Preparations Screen to view the details of the recipe.
+
 
 Settings Screen
 
