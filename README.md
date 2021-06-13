@@ -2,6 +2,8 @@
 Aprikot
 Recipe Application
 
+<img src="images/"
+
 Udacity Kotlin Android Developer NanoDegree
 Michael May
 
