@@ -5,7 +5,7 @@ Udacity Kotlin Android Developer NanoDegree
 
 by Michael May
 
-![Image](https://github.com/maydev99/Aprikot/blob/master/aprikot_tripple_screen_shot.png)
+![Image](https://github.com/maydev99/Aprikot/blob/master/aprikot_tripple_shot.png)
 
 Description:
 Aprikot is a food recipe app which uses data from TheMealDB (https://www.themealdb.com)/
