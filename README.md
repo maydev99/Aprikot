@@ -8,7 +8,7 @@ by Michael May
 ![Image](https://github.com/maydev99/Aprikot/blob/master/aprikot_tripple_shot.png)
 
 ## Description:
-Aprikot is a food recipe app which uses data from TheMealDB (https://www.themealdb.com)/
+Aprikot is a food recipe app which uses data from TheMealDB (https://www.themealdb.com)
 This is a free to use API that does not require an api key. 
 
 When starting the app you will see a categories screen that represents various meal categories. There are three fragments attached to the MainActivity all connected through Navigation Manager and Bottom Navigation bar. Along with the categories screen you can navigate to either the Favorites or Settings Screen.
